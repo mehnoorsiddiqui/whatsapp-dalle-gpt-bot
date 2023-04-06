@@ -1,0 +1,11 @@
+node_modules/
+package-lock.json
+WhatsApp+Cloud+API/node_modules/
+WhatsApp+Cloud+API/package-lock.json
+OpenAI+API/node_modules/
+OpenAI+API/package-lock.
+WhatsApp+Cloud+API-TS
+.env
+
+
+

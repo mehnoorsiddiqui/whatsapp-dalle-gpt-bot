@@ -22,8 +22,7 @@ git clone https://github.com/mehnoorsiddiqui/whatsapp-polyglot-painter
 
 ### Creating an OpenAI account to get an API key.
 1. Go to the [OpenAI](https://openai.com/) website and sign up by filling out the registration form. 
-2. Navigate to the `API keys' tab in your dashboard, generate a new API key, and copy it to use in your applications.
-
+2. Navigate to the `API keys' tab in your dashboard and generate a new API key.
 ### Setting up Webhook URL
 
 To set up webhook on the Meta Developer portal (also enter matching verify token). You may use a service like [ngrok](https://ngrok.com/) to make your local app publicly accessible so this webhook can be registered with Whatsapp.

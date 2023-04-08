@@ -26,7 +26,7 @@ git clone https://github.com/mehnoorsiddiqui/whatsapp-polyglot-painter
 
 ### Setting up Webhook URL
 
-To set up webhook on the Meta Developer portal (also enter matching verify token, `app`  in our case). You may use a service like [ngrok](https://ngrok.com/) to make your local app publicly accessible so this webhook can be registered with Whatsapp.
+To set up webhook on the Meta Developer portal (also enter matching verify token). You may use a service like [ngrok](https://ngrok.com/) to make your local app publicly accessible so this webhook can be registered with Whatsapp.
 [![Webhook](./public/webhook.png)]
 
 ### Setting up the .env file

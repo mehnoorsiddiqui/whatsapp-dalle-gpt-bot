@@ -1,28 +1,5 @@
 const fs = require('fs');
-// const { ApiController,ApiError,Client,FileWrapper} = require('openai-whisper-apilib');
 const { Client,OpenAIController, FileWrapper} = require('openai-apilib');
-
-// const fakeclient = new Client({
-//   timeout: 0,
-// });
-// const apiController = new ApiController(fakeclient);
-// const task = 'transcribe';
-// const language = 'ur';
-
-// const transcribeAudio= async(audioFilePath)=>{
-//     const audioFile = new FileWrapper(fs.createReadStream(audioFilePath));
-//     try {     
-//         const { result, ...httpResponse } = await apiController.transcribeFileAsrPost(audioFile, task, language);                       
-//         return result.text;
-//       } catch(error) {
-//         console.log(error)    
-//         if (error instanceof ApiError) {
-//           const errors = error.result;
-//           // const { statusCode, headers } = error;
-//         }
-//       }
-// }
-
 
 // Create OpenAI configuration
 const client = new Client({
@@ -67,6 +44,7 @@ const createImage_ = async(prompt)=>{
 const creatChatcompletion_ = async(promptMessage, promptType, language) =>{
 
   let lang = (language ==='en') ? 'English' : 'Urdu';
+  
   let prompt;
   if(promptType === 'languageDetectPrompt'){
     prompt =  `detect [${promptMessage}] language. Is this text language English? Answer in yes or no only. Donot add any descriptions`;
@@ -79,7 +57,7 @@ const creatChatcompletion_ = async(promptMessage, promptType, language) =>{
     const { result } = await openAIController.createChatCompletion({
         model: "gpt-3.5-turbo",
         messages: [
-          // {role: "system", content: "You are ChatGPT, a large language model trained by OpenAI. Answer in detail  "},
+          {role: "system", content: `You are ChatGPT, a large language model trained by OpenAI. Answer strictly in ${lang}`},
           {role: "user", content: `${prompt}`}
         ],
         temperature: 0.5,
@@ -93,6 +71,7 @@ const creatChatcompletion_ = async(promptMessage, promptType, language) =>{
   } catch(error) {
     console.log(error);
   }
+ 
 }
 
 

@@ -4,7 +4,7 @@ class Language {
     }
   
     setLanguage(str) {
-      this.lannguage = str;
+      this.language = str;
     }
   
     getLanguage() {

@@ -6,6 +6,8 @@ OpenAI+API/node_modules/
 OpenAI+API/package-lock.
 WhatsApp+Cloud+API-TS
 .env
+vercel.json
+.vercel
 
 
 

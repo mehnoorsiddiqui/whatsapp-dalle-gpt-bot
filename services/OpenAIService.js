@@ -57,7 +57,7 @@ const creatChatcompletion_ = async(promptMessage, promptType, language) =>{
     const { result } = await openAIController.createChatCompletion({
         model: "gpt-3.5-turbo",
         messages: [
-          {role: "system", content: `You are ChatGPT, a large language model trained by OpenAI. Answer strictly in ${lang}`},
+          {role: "system", content: `You are ChatGPT, a large language model trained by OpenAI. The number of words in your reply cannot exceed 50 words. Answer strictly in ${lang}`},
           {role: "user", content: `${prompt}`}
         ],
         temperature: 0.5,

@@ -4,7 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "start": "nodemon index.js",
+    "start": "nod index.js",
     "recursive": "npm-recursive-install"
   },
   "keywords": [],
@@ -18,8 +18,7 @@
     "fluent-ffmpeg": "^2.1.2",
     "node-fetch": "^2.6.7",
     "whatsapp-cloud-apilib": "./WhatsApp+Cloud+API",
-    "openai-apilib" : "./OpenAI+API",
-    "nodemon": "^2.0.20"
+    "openai-apilib" : "./OpenAI+API"
   },
   "devDependencies": {
     "recursive-install": "^1.4.0"

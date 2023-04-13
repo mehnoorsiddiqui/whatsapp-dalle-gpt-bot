@@ -134,11 +134,7 @@ const sendMessage_ = async(from,text,messageType)=> {
         const { result } = await messagesController.sendMessage(phoneNumberID_, body);
         return result;
       } catch(error) {
-        console.log(error)
-        if (error instanceof ApiError) {
-          const errors = error.result;
-          // const { statusCode, headers } = error;
-        }
+        console.log(error)        
       }
 }
 

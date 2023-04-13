@@ -1,5 +1,5 @@
-const {  downloadAudio_,} = require("./services/WhatsAppCloudService");
-const {createTranscription_} = require("./services/OpenAIService");
+const { downloadAudio_ } = require("./services/WhatsAppCloudService");
+const { createTranscription_ } = require("./services/OpenAIService");
 const fs = require("fs").promises;
 const os = require("os");
 const path = require("path");
@@ -7,19 +7,22 @@ const ffmpeg = require("fluent-ffmpeg");
 const ffmpegPath = require("@ffmpeg-installer/ffmpeg").path;
 ffmpeg.setFfmpegPath(ffmpegPath);
 
-async function Transcription(audioID ,language) {
+async function Transcription(audioID, language) {
   const downloadMedia = await downloadAudio_(audioID);
 
   //Creat temporary directory and remove it after function execution.
-  const tempDir = await fs.mkdtemp(path.join(await fs.realpath(os.tmpdir()), path.sep));
+  const tempDir = await fs.mkdtemp(
+    path.join(await fs.realpath(os.tmpdir()), path.sep)
+  );
   try {
     const orginalAudioPath = path.join(tempDir, "file");
     await fs.writeFile(orginalAudioPath, await downloadMedia.buffer());
     const audioName = audioID + ".mp3";
     const transcodedAudioPath = path.join(tempDir, audioName);
     await transcodeAudio(orginalAudioPath, transcodedAudioPath, "mp3");
-    const text = await createTranscription_(transcodedAudioPath,language);
-    console.log("transcription text",text);
+    const text = await createTranscription_(transcodedAudioPath, language);
+    console.log("transcription text", text);
+
     return text;
   } finally {
     await fs.rm(tempDir, { recursive: true });
@@ -30,22 +33,20 @@ async function Transcription(audioID ,language) {
 async function transcodeAudio(inputPath, outputPath, format) {
   return new Promise((resolve, reject) => {
     ffmpeg()
-    .input(inputPath)
-    .outputFormat(format)
+      .input(inputPath)
+      .outputFormat(format)
 
-    .on("error", (error) => {
-      console.error(`FFmpeg error: ${error.message}`);
-      reject(error);
-    })
+      .on("error", error => {
+        console.error(`FFmpeg error: ${error.message}`);
+        reject(error);
+      })
 
-    .on("end", () => {
-      console.log("Conversion succeeded!");
-      resolve();
-    })
-    .save(outputPath);
-    
+      .on("end", () => {
+        console.log("Conversion succeeded!");
+        resolve();
+      })
+      .save(outputPath);
   });
 }
-
 
 module.exports = Transcription;

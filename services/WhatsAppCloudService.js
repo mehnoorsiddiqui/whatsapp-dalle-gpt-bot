@@ -11,7 +11,7 @@ const client = new Client({
 const messagesController = new MessagesController(client);
 
 //send message
-const sendMessage_ = async (from, text, messageType) => {
+const sendMessage_ = async (from, messageType , text = '') => {
   const from_ = from.toString();
   const phoneNumberID_ = process.env.PHONE_NUMBER_ID;
   let textMessage = ' ';

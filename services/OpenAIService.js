@@ -10,23 +10,15 @@ const client = new Client({
 // Create OpenAI API client
 const openAIController = new OpenAIController(client);
 
-const createTranscription_ = async (audioFilePath, language) => {
+const createTranscription_ = async (audioFilePath, aiModel) => {
   const file = new FileWrapper(fs.createReadStream(audioFilePath));
   const model = "whisper-1";
-  const prompt = "? . ; , ";
+  const prompt = aiModel === "chatgpt" ? "English Language or اردو زبان" : "English Language";
   const responseFormat = "json";
   const temperature = 0;
-  const lang = language;
+  const language = aiModel === "dalle" ? "en" : undefined;
   try {
-    const { result } = await openAIController.createTranscription(
-      file,
-      model,
-      prompt,
-      responseFormat,
-      temperature,
-      lang
-    );
-
+    const { result } = await openAIController.createTranscription(file, model, prompt, responseFormat, temperature, language);
     return result.text;
   } catch (error) {
     console.log(error);
@@ -48,9 +40,9 @@ const createImage_ = async (prompt) => {
 };
 
 const creatChatcompletion_ = async (promptMessage, promptType, language) => {
-  let lang = language === "en" ? "English" : "Urdu";
-  let systemPrompt;
-  let prompt;
+  const lang = language === "en" ? "English" : "Urdu";
+  let systemPrompt, prompt;
+
   if (promptType === "languageDetectPrompt") {
     systemPrompt = `You are a helpful assistant that knows English. You have the ability to check if the sentence is in English or not.`;
     prompt = `act as a  English language detector. Just detect if the following sentence is in English or not.The sentence is ${promptMessage}. Answer in YES or NO only. Do not write any explanations. `;

@@ -5,7 +5,7 @@ const fetch = require('node-fetch');
 const token = process.env.WHATSAPP_TOKEN;
 
 const client = new Client({
-  timeout: 30000,  //30 sec
+  timeout: 20000,  //30 sec
   accessToken: process.env.WHATSAPP_TOKEN,
 });
 const messagesController = new MessagesController(client);

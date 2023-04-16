@@ -11,7 +11,7 @@ const client = new Client({
 const messagesController = new MessagesController(client);
 
 //send message
-const sendMessage_ = async (from, messageType , text = '') => {
+const sendMessage = async (from, messageType , text = '') => {
   const from_ = from.toString();
   const phoneNumberID_ = process.env.PHONE_NUMBER_ID;
   let textMessage = ' ';
@@ -122,7 +122,7 @@ const sendMessage_ = async (from, messageType , text = '') => {
 
 const mediaController = new MediaController(client);
 
-const downloadAudio_ = async (mediaID) => {
+const downloadAudio = async (mediaID) => {
   try {
     const { result } = await mediaController.retrieveMediaURL(mediaID);
     const audioURL = result.url;
@@ -136,4 +136,4 @@ const downloadAudio_ = async (mediaID) => {
   }
 }
 
-module.exports = { sendMessage_, downloadAudio_ };
+module.exports = { sendMessage, downloadAudio};

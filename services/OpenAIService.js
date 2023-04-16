@@ -10,7 +10,7 @@ const client = new Client({
 // Create OpenAI API client
 const openAIController = new OpenAIController(client);
 
-const createTranscription_ = async (audioFilePath, aiModel) => {
+const createTranscription = async (audioFilePath, aiModel) => {
   const file = new FileWrapper(fs.createReadStream(audioFilePath));
   const model = "whisper-1";
   const prompt = aiModel === "chatgpt" ? "English Language or اردو زبان" : "English Language";
@@ -25,7 +25,7 @@ const createTranscription_ = async (audioFilePath, aiModel) => {
   }
 };
 
-const createImage_ = async (prompt) => {
+const createImage = async (prompt) => {
   try {
     console.log(prompt, "inside createImage");
     const { result } = await openAIController.createImage({
@@ -39,7 +39,7 @@ const createImage_ = async (prompt) => {
   }
 };
 
-const creatChatcompletion_ = async (promptMessage, promptType, language) => {
+const createChatcompletion = async (promptMessage, promptType, language) => {
   const lang = language === "en" ? "English" : "Urdu";
   let systemPrompt, prompt;
 
@@ -77,4 +77,5 @@ const creatChatcompletion_ = async (promptMessage, promptType, language) => {
   }
 };
 
-module.exports = { createTranscription_, createImage_, creatChatcompletion_ };
+
+module.exports = { createTranscription, createImage, createChatcompletion };

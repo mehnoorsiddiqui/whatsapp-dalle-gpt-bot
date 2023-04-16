@@ -1,4 +1,4 @@
-const { sendMessage_ } = require("./services/WhatsAppCloudService");
+const { sendMessage } = require("./services/WhatsAppCloudService");
 const User = require("./User");
 const getMessageType = require("./utils/getMessageType");
 const handleListMessage = require("./handlers/handleListMessage");
@@ -40,10 +40,10 @@ async function receive(message) {
 
   switch (messageType) {
     case "model":
-      await sendMessage_(from, "interactive_model");
+      await sendMessage(from, "interactive_model");
       break;
     case "language":
-      await sendMessage_(from, "interactive_language");
+      await sendMessage(from, "interactive_language");
       break;
     case "list":
       await handleListMessage(from, msg,user);

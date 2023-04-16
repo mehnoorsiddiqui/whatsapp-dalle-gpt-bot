@@ -1,5 +1,5 @@
-const { downloadAudio_ } = require("./services/WhatsAppCloudService");
-const { createTranscription_ } = require("./services/OpenAIService");
+const { downloadAudio } = require("./services/WhatsAppCloudService");
+const { createTranscription } = require("./services/OpenAIService");
 const fs = require("fs").promises;
 const os = require("os");
 const path = require("path");
@@ -8,7 +8,7 @@ const ffmpegPath = require("@ffmpeg-installer/ffmpeg").path;
 ffmpeg.setFfmpegPath(ffmpegPath);
 
 async function Transcription(audioID, language) {
-  const downloadMedia = await downloadAudio_(audioID);
+  const downloadMedia = await downloadAudio(audioID);
 
   //Creat temporary directory and remove it after function execution.
   const tempDir = await fs.mkdtemp(
@@ -20,7 +20,7 @@ async function Transcription(audioID, language) {
     const audioName = audioID + ".mp3";
     const transcodedAudioPath = path.join(tempDir, audioName);
     await transcodeAudio(orginalAudioPath, transcodedAudioPath, "mp3");
-    const text = await createTranscription_(transcodedAudioPath, language);
+    const text = await createTranscription(transcodedAudioPath, language);
     console.log("transcription text", text);
 
     return text;

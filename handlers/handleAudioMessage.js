@@ -10,10 +10,18 @@ async function handleAudioMessage(from, message, userObj) {
 
     if (aiModel === "chatgpt") {
         const transcriptedMessage = await Transcription(audioID ,aiModel);
+        if (!transcriptedMessage) {
+            await sendMessage(from, "text", "Sorry, we were unable to detect any audio in your message. Please make sure your microphone is enabled and try again.");
+            return;
+        }
         const chatGPTResponse = await createChatcompletion(transcriptedMessage, "normalPrompt", botLanguage);
         await sendMessage(from, "text", chatGPTResponse);
     } else if (aiModel === "dalle") {
         const transcriptedMessage = await Transcription(audioID, aiModel);
+        if (!transcriptedMessage) {
+            await sendMessage(from, "text", "Sorry, we were unable to detect any audio in your message. Please make sure your microphone is enabled and try again.");
+            return;
+        }
         const dalleResponse = await createImage(transcriptedMessage);
         await sendMessage(from, "image", dalleResponse);
     }

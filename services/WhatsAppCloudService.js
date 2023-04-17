@@ -5,7 +5,7 @@ const fetch = require('node-fetch');
 const token = process.env.WHATSAPP_TOKEN;
 
 const client = new Client({
-  timeout: 20000,  //30 sec
+  timeout: 20000,  //20 sec
   accessToken: process.env.WHATSAPP_TOKEN,
 });
 const messagesController = new MessagesController(client);
@@ -14,13 +14,10 @@ const messagesController = new MessagesController(client);
 const sendMessage = async (from, messageType , text = '') => {
   const from_ = from.toString();
   const phoneNumberID_ = process.env.PHONE_NUMBER_ID;
-  let textMessage = ' ';
 
-  if (text === undefined || text === null || text.length === 0) {
-    textMessage = "Sorry, we were unable to detect any audio in your message. Please make sure your microphone is enabled and try again.";
-  } else if (typeof text === 'string') {
-    textMessage = text;
-  }
+  const textMessage = text ;
+  //? text : "Sorry, we were unable to detect any audio in your message. Please make sure your microphone is enabled and try again.";
+
   let body;
 
   switch (messageType) {

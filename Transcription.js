@@ -24,7 +24,10 @@ async function Transcription(audioID, language) {
     console.log("transcription text", text);
 
     return text;
-  } finally {
+  }catch (error) {
+    throw error;
+  }
+  finally {
     await fs.rm(tempDir, { recursive: true });
   }
 }

@@ -18,10 +18,10 @@ const createTranscription = async (audioFilePath, aiModel) => {
   const temperature = 0;
   const language = aiModel === "dalle" ? "en" : undefined;
   try {
-    const { result } = await openAIController.createTranscription(file, model, prompt, responseFormat, temperature, language);
+    const { result  } = await openAIController.createTranscription(file, model, prompt, responseFormat, temperature, language);    
     return result.text;
   } catch (error) {
-    console.log(error);
+    throw error;
   }
 };
 
@@ -35,7 +35,7 @@ const createImage = async (prompt) => {
     });
     return result.data[0].url;
   } catch (error) {
-    console.error(error);
+    throw error;    
   }
 };
 
@@ -72,8 +72,8 @@ const createChatcompletion = async (promptMessage, promptType, language) => {
       presence_penalty: 0.2,
     });
     return result.choices[0].message.content;
-  } catch (error) {
-    console.log(error);
+  } catch (error) {    
+    throw error;        
   }
 };
 

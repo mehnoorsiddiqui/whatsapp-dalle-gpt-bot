@@ -5,19 +5,18 @@ const fetch = require('node-fetch');
 const token = process.env.WHATSAPP_TOKEN;
 
 const client = new Client({
-  timeout: 20000,  //20 sec
+  timeout: 0, 
   accessToken: process.env.WHATSAPP_TOKEN,
+  version: 'v16.0'
 });
+
 const messagesController = new MessagesController(client);
 
 //send message
-const sendMessage = async (from, messageType , text = '') => {
+const sendMessage = async (from, messageType, text = '') => {
   const from_ = from.toString();
   const phoneNumberID_ = process.env.PHONE_NUMBER_ID;
-
-  const textMessage = text ;
-  //? text : "Sorry, we were unable to detect any audio in your message. Please make sure your microphone is enabled and try again.";
-
+  const textMessage = text ? text : "Sorry, we could not detect any text in your message.";
   let body;
 
   switch (messageType) {
@@ -128,9 +127,8 @@ const downloadAudio = async (mediaID) => {
     return audioBinary;
 
   } catch (error) {
-    console.log(error)
-
+    throw error
   }
 }
 
-module.exports = { sendMessage, downloadAudio};
+module.exports = { sendMessage, downloadAudio };

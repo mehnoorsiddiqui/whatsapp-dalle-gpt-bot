@@ -30,7 +30,6 @@ const createTranscription = async (audioFilePath, aiModel) => {
 
 const createImage = async prompt => {
   try {
-    console.log(prompt, "inside createImage");
     const { result } = await openAIController.createImage({
       prompt: `${prompt}`,
       n: 1,

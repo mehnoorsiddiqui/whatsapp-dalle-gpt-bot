@@ -14,8 +14,7 @@ const messagesController = new MessagesController(client);
 
 //send message
 const sendMessage = async (from, messageType, text = '') => {
-  const from_ = from.toString();
-  const phoneNumberID_ = process.env.PHONE_NUMBER_ID;
+  const phoneNumberID = process.env.PHONE_NUMBER_ID;
   const textMessage = text ? text : "Sorry, we could not detect any text in your message.";
   let body;
 
@@ -23,7 +22,7 @@ const sendMessage = async (from, messageType, text = '') => {
     case 'text':
       body = {
         messagingProduct: 'whatsapp',
-        to: from_,
+        to: from,
         type: "text",
         text: {
           body: textMessage
@@ -33,7 +32,7 @@ const sendMessage = async (from, messageType, text = '') => {
     case 'image':
       body = {
         messagingProduct: 'whatsapp',
-        to: from_,
+        to: from,
         type: "image",
         image: {
           link: textMessage
@@ -43,7 +42,7 @@ const sendMessage = async (from, messageType, text = '') => {
     case 'interactive_model':
       body = {
         messagingProduct: 'whatsapp',
-        to: from_,
+        to: from,
         type: "interactive",
         interactive: {
           action: {
@@ -74,7 +73,7 @@ const sendMessage = async (from, messageType, text = '') => {
     case 'interactive_language':
       body = {
         messagingProduct: 'whatsapp',
-        to: from_,
+        to: from,
         type: "interactive",
         interactive: {
           action: {
@@ -108,7 +107,7 @@ const sendMessage = async (from, messageType, text = '') => {
   }
 
   try {
-    const { result } = await messagesController.sendMessage(phoneNumberID_, body);
+    const { result } = await messagesController.sendMessage(phoneNumberID, body);
     return result;
   } catch (error) {
     console.log(error)

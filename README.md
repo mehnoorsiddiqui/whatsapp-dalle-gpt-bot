@@ -1,4 +1,5 @@
 # WhatsApp Dalle Whisper GPT bot
+![WhatsApp Dalle Whisper GPT bot](./public/demo.gif)
 
 ## How it works
 A conversational, voice-enabled, multilingual WhatsApp bot that can generate both text and image responses using APIMatic auto-generated SDKs for [WhatsApp](https://www.apimatic.io/apidocs/whatsapp-api/v/1_0#/http/guides/send-a-message)and [OpenAI](https://www.apimatic.io/api-docs/openai) APIs.

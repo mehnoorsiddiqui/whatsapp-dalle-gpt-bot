@@ -1,9 +1,9 @@
 const { sendMessage } = require("./services/WhatsAppCloudService");
 const User = require("./User");
 const getMessageType = require("./utils/getMessageType");
-const handleListMessage = require("./handlers/handleListMessage");
-const handleAudioMessage = require("./handlers/handleAudioMessage");
-const handleTextMessage = require("./handlers/handleTextMessage");
+const handleListMessage = require("./handlers/listMessage");
+const handleAudioMessage = require("./handlers/audioMessage");
+const handleTextMessage = require("./handlers/textMessage");
 
 const users = [];
 
@@ -20,7 +20,7 @@ function getUserOrCreate(number) {
   return user;
 }
 
-async function receive(message) {
+async function processWhatsAppPostWebhook(message) {
 
   //Ignore ibound notifications / messages  older than 12 min
   const filteredMessages = message?.entry[0]?.changes[0]?.value?.messages?.filter(
@@ -59,6 +59,6 @@ async function receive(message) {
   }
 }
 
-module.exports = receive;
+module.exports = processWhatsAppPostWebhook;
 
 

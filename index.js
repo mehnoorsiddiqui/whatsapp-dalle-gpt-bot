@@ -4,12 +4,12 @@ const body_parser = require("body-parser");
 
 const app = express().use(body_parser.json());
 
-const receive = require("./WhatsAppPostWebhook");
-const token = process.env.VERIFY_TOKEN
+const processWhatsAppPostWebhook = require("./processWhatsAppPostWebhook");
+const token = process.env.WEBHOOK_VERIFY_TOKEN
 
 app.post("/webhook", async (req, res) => {
   try {
-    await receive(req.body);
+    await processWhatsAppPostWebhook(req.body);
     res.sendStatus(200);
   } catch (error) {
     res.sendStatus(404);

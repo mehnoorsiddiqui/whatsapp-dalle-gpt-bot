@@ -2,11 +2,11 @@ require("dotenv").config();
 const { Client, MessagesController, MediaController } = require('whatsapp-cloud-apilib');
 
 const fetch = require('node-fetch');
-const token = process.env.WHATSAPP_TOKEN;
+const token = process.env.WHATSAPP_ACCESS_TOKEN;
 
 const client = new Client({
-  timeout: 0, 
-  accessToken: process.env.WHATSAPP_TOKEN,
+  timeout: 0,
+  accessToken: token,
   version: 'v16.0'
 });
 
@@ -14,37 +14,26 @@ const messagesController = new MessagesController(client);
 
 //send message
 const sendMessage = async (from, messageType, text = '') => {
-  const phoneNumberID = process.env.PHONE_NUMBER_ID;
+  const phoneNumberID = process.env.WHATSAPP_PHONE_NUMBER_ID;
   const textMessage = text ? text : "Sorry, we could not detect any text in your message.";
-  let body;
+
+  let body = {
+    messagingProduct: 'whatsapp',
+    to: from
+  };
 
   switch (messageType) {
     case 'text':
-      body = {
-        messagingProduct: 'whatsapp',
-        to: from,
-        type: "text",
-        text: {
-          body: textMessage
-        }
-      };
+      body.type = "text";
+      body.text = { body: textMessage }
       break;
     case 'image':
-      body = {
-        messagingProduct: 'whatsapp',
-        to: from,
-        type: "image",
-        image: {
-          link: textMessage
-        }
-      };
+      body.type = "image";
+      body.image = { link: textMessage }
       break;
     case 'interactive_model':
-      body = {
-        messagingProduct: 'whatsapp',
-        to: from,
-        type: "interactive",
-        interactive: {
+        body.type = "interactive";
+        body.interactive ={
           action: {
             sections: [
               {
@@ -67,15 +56,11 @@ const sendMessage = async (from, messageType, text = '') => {
             text: "Select the AI Model"
           },
           type: "list"
-        }
-      }
+        }      
       break;
     case 'interactive_language':
-      body = {
-        messagingProduct: 'whatsapp',
-        to: from,
-        type: "interactive",
-        interactive: {
+        body.type= "interactive";
+        body.interactive= {
           action: {
             sections: [
               {
@@ -98,8 +83,7 @@ const sendMessage = async (from, messageType, text = '') => {
             text: "Select the Language"
           },
           type: "list"
-        }
-      }
+        }      
       break;
     default:
       console.log('This is not a known type');

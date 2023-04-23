@@ -1,5 +1,5 @@
-# WhatsApp Dalle Whisper GPT bot
-![WhatsApp Dalle Whisper GPT bot](./public/demo.gif)
+# WhatsApp Chatty Dalle
+![WhatsApp Chatty Dalle](./public/demo.gif)
 
 ## How it works
 A conversational, voice-enabled, multilingual WhatsApp bot that can generate both text and image responses using APIMatic auto-generated SDKs for [WhatsApp](https://www.apimatic.io/apidocs/whatsapp-api/v/1_0#/http/guides/send-a-message)and [OpenAI](https://www.apimatic.io/api-docs/openai) APIs.
@@ -11,7 +11,7 @@ A conversational, voice-enabled, multilingual WhatsApp bot that can generate bot
 ### Cloning the repository the local machine.
 
 ```bash
-git clone https://github.com/mehnoorsiddiqui/whatsapp-dalle-whisper-gpt-bot
+git clone https://github.com/mehnoorsiddiqui/whatsapp-chatty-dalle.git
 ```
 
 ### Creating a account on Meta to get an API key.
